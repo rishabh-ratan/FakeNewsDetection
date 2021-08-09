@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Fake News Detection</title>
+  <style>
+	  body{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: url(road3.jpg) no-repeat;
+    background-position-x: -490px;
+    background-position-y: -550px;
+}
+.box{
+    background-color: black;
+    width: 800px;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* on a 2D axis its moved 50 to right and 50 to down */
+    text-align: center;
+    border-radius: 24px;
+    border: solid;
+    border-color: red;
+}
+.box h1,pre{
+    color: red;
+    text-transform: uppercase;
+    font-weight: 1500;
+}
+.box textarea[name="message"]{
+    border: 0;
+    background: transparent;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid red;
+    padding: 14px 10px;
+    width: 700px;
+    outline: none;
+    color: red;
+    border-radius: 24px;
+    transition: 0.25s;
+    font-weight: 1000;
+}
+.box button[type="submit"]{
+    border: 0;
+    background: transparent;
+    display: block;
+    margin: 1px auto;
+    text-align: center;
+    border: 2px solid red;
+    padding: 10px 10px;
+    width: 200px;
+    color: red;
+    border-radius: 24px;
+}
+.box button[type="submit"]:hover{
+    background: green;
+}
+  </style>
+</head>
+
+<body>
+ <div class="login">
+
+    <form class="box" action="{{ url_for('predict')}}" method="POST">
+		<h1>FAKE NEWS DETECTION</h1>
+		<pre>Enter your news text below</pre>
+    	<textarea  name="message" rows="6" cols="50" required="required" style="font-size: 18pt"></textarea>
+		<br> </br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+
+    <div class="results">
+
+		{% if prediction == ['FAKE']%}
+			<h2 style="color:red;">It's Probably Fake</h2>
+		{% elif prediction == ['REAL']%}
+			<h2 style="color:green;"><b>It's Probably Real</b></h2>
+		{% endif %}
+
+	</div>
+
+    </form>
+
+	</div>
+</body>
+</html>
